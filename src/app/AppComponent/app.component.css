@@ -1,0 +1,7 @@
+ul.nav a {
+    font-weight: 500;
+}
+ul.nav a.active {
+    background: #337ab7;
+    color: #fff;
+}

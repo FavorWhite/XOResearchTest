@@ -1,0 +1,92 @@
+﻿
+<div class="row">
+    <div class="col-md-8">
+        <h2>Group page</h2>
+        <button class="btn btn-success" data-toggle="modal" data-target="#AddModal" (click)="clearGroup()">Add</button>
+        <button class="btn btn-warning" data-toggle="modal" data-target="#EditModal" (click)="getGroupForEdit()"  [disabled]="selectedGroups.length!==1">Edit</button>
+        <button class="btn btn-danger" (click)="delGroup()" [disabled]="selectedGroups.length==0">Delete</button>
+        
+
+        <div class="form-group dashboard-select">
+            <div class="select-header"><span>Name</span></div>
+            <!--<select multiple name="Groups" class="form-control" [(ngModel)]="selectedGroups" size="{{groupCount}}">
+                <option *ngFor="let group of groups" [value]="group"><div>{{group.name}}</div> </option>
+            </select>-->
+            <div class="checkbox-wrapper" *ngFor="let group of groups" [class.selected]="isSelected(group)">
+                <label>
+                    <input type="checkbox"
+                           (change)="$event.target.checked? onChecked(group) : onEmptyCheck(group)">
+                    <span>{{group.name}}<div class="badge">{{group.users.length}}</div></span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h2>Roles List</h2>
+        <div *ngIf="selectedGroups">
+            <div *ngFor="let group of selectedGroups">
+                <dl>
+                    <dt>{{group.name}}:</dt>
+                    <dd *ngFor="let user of group.users">{{user.name}} {{user.surname}}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Add -->
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="Add">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="AddLabel">Add Group</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input class="form-control" type="text" name="name" [(ngModel)]="group.name" #name="ngModel" required />
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button (click)="addGroup(group)" [disabled]="name.invalid" data-dismiss="modal" class="btn btn-success">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Edit -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="Edit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="EditLabel">Edit Group</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input class="form-control" type="text" name="ForEditname" [(ngModel)]="groupForEdit.name" #ForEditname="ngModel" required />
+                </div>
+         
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button (click)="editUser()" [disabled]="ForEditname.invalid"
+                        data-dismiss="modal" class="btn btn-success">
+                    Update
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

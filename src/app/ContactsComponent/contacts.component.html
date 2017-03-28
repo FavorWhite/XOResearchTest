@@ -1,0 +1,137 @@
+﻿
+<div class="row">
+    <div class="col-md-8">
+        <h2>Contact page</h2>
+        <button class="btn btn-success" data-toggle="modal" data-target="#AddModal" (click)="clearUser()">Add</button>
+        <button class="btn btn-warning" data-toggle="modal" data-target="#EditModal" (click)="getUserForEdit()" [disabled]="selectedUsers.length!==1">Edit</button>
+        <button class="btn btn-danger" (click)="delUser()" [disabled]="selectedUsers.length==0">Delete</button>
+
+
+
+
+        <div class="form-group dashboard-select">
+            <div class="select-header"><span>Name</span><span>Surname</span></div>
+            <!--<select multiple name="Users" class="form-control" size="{{usersCount}}" [(ngModel)]="selectedUsers">
+                <option *ngFor="let user of users" [value]="user"><span>{{user.name}}</span><span>{{user.surname}}</span></option>
+            </select>-->
+
+            <div class="checkbox-wrapper" *ngFor="let user of users" [class.selected]="isSelected(user)">
+                <label>
+                    <input type="checkbox"
+                           (change)="$event.target.checked? onChecked(user) : onEmptyCheck(user)">
+                    <span>{{user.name}}</span><span>{{user.surname}}</span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h2>Contact card</h2>
+
+        <div *ngIf="selectedUsers">
+            <div *ngFor="let user of selectedUsers">
+                <h3>
+                    {{user.name}} {{user.surname}}
+                </h3>
+                <p>Age: {{user.age}}</p>
+                <p>Group: {{user.group}}</p>
+                <p>Description: {{user.description}}</p>
+                <p>Note: {{user.note}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Add -->
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="Add">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="AddLabel">Add User</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input class="form-control" type="text" name="name" [(ngModel)]="user.name" #name="ngModel" required />
+                </div>
+                <div class="form-group">
+                    <label>Surname</label>
+                    <input class="form-control" type="text" name="surname" [(ngModel)]="user.surname" #surname="ngModel" required />
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input class="form-control" type="number" name="age" [(ngModel)]="user.age" #age="ngModel" required />
+
+                </div>
+                <select class="form-control" [(ngModel)]="user.group" name="group" #group="ngModel" required>
+                    <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
+                </select>
+                <div class="form-group">
+                    <label class="control-label">Description:</label>
+                    <input type="text" name="description" [(ngModel)]="user.description" #description="ngModel" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Note:</label>
+                    <input type="text" name="note" [(ngModel)]="user.note" #note="ngModel" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button (click)="addUser(user)" [disabled]="name.invalid || surname.invalid || age.invalid || description.invalid || group.invalid" data-dismiss="modal" class="btn btn-success">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Edit -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="Edit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="EditLabel">Edit User</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input class="form-control" type="text" name="ForEditname" [(ngModel)]="userForEdit.name" #ForEditname="ngModel" required />
+                </div>
+                <div class="form-group">
+                    <label>Surname</label>
+                    <input class="form-control" type="text" name="ForEditsurname" [(ngModel)]="userForEdit.surname" #ForEditsurname="ngModel" required />
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input class="form-control" type="number" name="ForEditage" [(ngModel)]="userForEdit.age" #ForEditage="ngModel" required />
+
+                </div>
+                <select class="form-control" [(ngModel)]="userForEdit.group" name="ForEditgroup" #ForEditgroup="ngModel" required>
+                    <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
+                </select>
+                <div class="form-group">
+                    <label class="control-label">Description:</label>
+                    <input type="text" name="ForEditdescription" [(ngModel)]="userForEdit.description" #ForEditdescription="ngModel" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Note:</label>
+                    <input type="text" name="ForEditnote" [(ngModel)]="userForEdit.note" #ForEditnote="ngModel" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button (click)="editUser()" [disabled]="ForEditname.invalid || ForEditsurname.invalid || ForEditage.invalid || ForEditdescription.invalid "
+                        data-dismiss="modal" class="btn btn-success">
+                    Update
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,70 @@
+h2 {
+    border-bottom: 2px solid #BFBFBF;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+.dashboard-select select.form-control {
+    border: none;
+    box-shadow: none;
+    width: 103%;
+    padding: 3px;
+}
+.form-group {
+    overflow: hidden;
+}
+/*.dashboard-select .form-control:focus {
+    border: none;
+    box-shadow: none;
+}*/
+.dashboard-select .checkbox-wrapper {
+    font-size: 20px;
+    padding: 3px;
+    font-weight: 400;
+    border-bottom: 1px dashed #B3B3B3;
+    cursor: pointer;
+}
+.dashboard-select .checkbox-wrapper:last-child {
+    border-bottom: none;
+}
+.dashboard-select .checkbox-wrapper span {
+    width: 50%;
+    display: inline-block;
+}
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+.checkbox-wrapper.selected {
+    background: #337ab7;
+}
+.checkbox-wrapper label {
+    display: block;
+    cursor: pointer;
+    color: #727272;
+}
+.checkbox-wrapper.selected label {
+    color: #fff;
+}
+.select-header {
+    border-bottom: 1px solid #000;
+}
+.select-header span {
+    font-size: 22px;
+    line-height: 42px;
+    width: 50%;
+    display: inline-block;
+    font-weight: 600;
+}
+h3 {
+    line-height: 42px;
+}
+.btn {
+    font-size: 16px;
+    padding: 6px 21px;
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+}

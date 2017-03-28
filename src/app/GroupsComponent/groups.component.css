@@ -1,0 +1,17 @@
+dt {
+    font-size: 24px;
+    font-weight: 500;
+}
+dd {
+    margin-left: 15px;
+    line-height: 23px;
+}
+.checkbox-wrapper .badge {
+    background: #337ab7;
+    width: auto;
+    margin-left: 10px;
+}
+.checkbox-wrapper.selected .badge {
+    background-color: #fff;
+    color: #337ab7;
+}
